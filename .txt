@@ -1,0 +1,6 @@
+db_user: mern_user
+pass: bSmpaOqnKvHAtUmN
+
+
+
+
