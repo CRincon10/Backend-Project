@@ -1,5 +1,6 @@
 const express = require('express');           //forma de importacion
 const dbConnection = require('./database/config');
+const cors = require('cors')
 require('dotenv').config()                   //importacoion del dotenv
 
 //servidor de express
@@ -8,6 +9,9 @@ const app = express();
 // conexion a base de datos mongo
 dbConnection()
 
+//CORS restriccion de peticiones a esta API lo dejo con la configuracion por defecto
+app.use(cors())
+
 //Directorio public
 app.use( express.static('public') )     
 
@@ -15,10 +19,13 @@ app.use( express.static('public') )
 app.use( express.json() )
 
 //rutas
-app.use('/api/auth', require('./routes/auth') )    //midlewere con el path o ruta(todo lo relacionado a autenticacion va a estar relacionado en el auth) donde va a estar habilitado el endpoint que se indica en el require
+app.use('/api/auth', require('./routes/auth') )    //midlewere con el path o ruta(todo lo relacionado a autenticacion va a estar en el auth) donde va a estar habilitado el endpoint que se indica en el require
+app.use('/api/events', require('./routes/events') )    
 
 
-//escuchar peticiones express   
+
+
+//escuchar peticiones y abrir el puerto de mi .env   
 app.listen(process.env.PORT, () => {
     console.log( `Servidor corriendo en puerto ${process.env.PORT}` )     
 } )
