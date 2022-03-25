@@ -39,7 +39,7 @@ const crearUsuario = async(req, res = response) => {              //ruta / donde
             name: usuario.name,
             token
         })
-        
+          
     } catch (error) {
         console.log(error)
         res.status(500).json({
@@ -108,9 +108,11 @@ const revalidarTokenUsuario = async(req, res = response) => {              //rut
     //generacion de un nuevo token
     const nuevoToken = await generarJWT( uid, name )
 
-
+    
     res.json({
         ok: true,
+        name: name,
+        uid:uid,
         token: nuevoToken
     })
 } 
